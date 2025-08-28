@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -13,25 +15,29 @@ import jakarta.persistence.Table;
 public class Producto {
 
     @Id /// Se coloca porque es la PK
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY) /// Esto hace que se genere automaticamente el ID
     @Column(name = "id_producto") /// mapea el valor de la BD con el del parametro
     private Integer idProducto;
 
     private String nombre;
 
     @Column(name = "id_categoria")
-    private Integer id_categoria;
+    private Integer idCtegoria;
 
     @Column(name = "codigo_barras")
     private String codigoBarras;
 
     @Column(name = "precio_venta")
-    private Double precioVenta;
+    private double precioVenta;
 
     @Column(name = "cantidad_stock")
     private Integer cantidadStock;
 
     private boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categoria categoria;
 
     /// Set y Get
     public Integer getIdProducto() {
@@ -48,12 +54,13 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getId_categoria() {
-        return id_categoria;
+    public Integer getIdCtegoria() {
+        return idCtegoria;
     }
-    public void setId_categoria(Integer id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setIdCtegoria(Integer idCtegoria) {
+        this.idCtegoria = idCtegoria;
     }
+
 
     public String getCodigoBarras() {
         return codigoBarras;
@@ -62,10 +69,10 @@ public class Producto {
         this.codigoBarras = codigoBarras;
     }
 
-    public Double getPrecioVenta() {
+    public double getPrecioVenta() {
         return precioVenta;
     }
-    public void setPrecioVenta(Double precioVenta) {
+    public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
@@ -83,4 +90,10 @@ public class Producto {
         this.estado = estado;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }

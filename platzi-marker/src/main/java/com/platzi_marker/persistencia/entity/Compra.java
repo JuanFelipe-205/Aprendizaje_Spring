@@ -5,17 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity /// Anotacion usada para declarar que esta clase mapeara una tabla en la BD.
 @Table(name = "compras") /// Esto permite identificar el nombre de la Base y comprarla con la clase actial
-public class Compras {
+public class Compra {
 
     @Id /// Se coloca porque es la PK
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY) /// Esto hace que se genere automaticamente el ID
     @Column(name = "id_compra")
     private Integer idCompra;
 
@@ -25,11 +28,17 @@ public class Compras {
     private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
-    private Integer medioPago;
+    private String  medioPago;
 
-    private Integer comentario;
+    private String comentario;
+    private String estado;
 
-    private Integer estado;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> productos;
 
     /// Set y Get
     public Integer getIdCompra() {
@@ -53,24 +62,40 @@ public class Compras {
         this.fecha = fecha;
     }
 
-    public Integer getMedioPago() {
+    public String getMedioPago() {
         return medioPago;
     }
-    public void setMedioPago(Integer medioPago) {
+    public void setMedioPago(String medioPago) {
         this.medioPago = medioPago;
     }
 
-    public Integer getComentario() {
+    public String getComentario() {
         return comentario;
     }
-    public void setComentario(Integer comentario) {
+    public void setComentario(String comentario) {
         this.comentario = comentario;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
+    }
+
+
 }

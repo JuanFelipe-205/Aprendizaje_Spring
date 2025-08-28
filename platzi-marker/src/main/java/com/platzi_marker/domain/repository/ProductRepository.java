@@ -1,0 +1,19 @@
+package com.platzi_marker.domain.repository;
+
+import com.platzi_marker.domain.Product;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductRepository {
+
+    /// Metodos que deben usar si se usa productos
+    List<Product> getAll();
+    Optional<List<Product>> getByCategory(int categoryId);
+    Optional<List<Product>> getScarseProducts(int quantity);
+    Optional<Product> getProduct(int productId);
+    Product save();
+    void delete(int productId);
+
+
+}
