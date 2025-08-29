@@ -14,7 +14,7 @@ public class ComprasProducto {
     private ComprasProductoPK id;
 
     private Integer cantidad;
-    private Double total;
+    private double total;
     private Boolean estado;
 
     @ManyToOne
@@ -40,10 +40,10 @@ public class ComprasProducto {
         this.cantidad = cantidad;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

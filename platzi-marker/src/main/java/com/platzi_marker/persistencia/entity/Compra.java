@@ -1,17 +1,8 @@
 package com.platzi_marker.persistencia.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Entity /// Anotacion usada para declarar que esta clase mapeara una tabla en la BD.
 @Table(name = "compras") /// Esto permite identificar el nombre de la Base y comprarla con la clase actial
@@ -37,13 +28,15 @@ public class Compra {
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra")
     private List<ComprasProducto> productos;
+
 
     /// Set y Get
     public Integer getIdCompra() {
         return idCompra;
     }
+
     public void setIdCompra(Integer idCompra) {
         this.idCompra = idCompra;
     }
@@ -51,6 +44,7 @@ public class Compra {
     public String getIdCliente() {
         return idCliente;
     }
+
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
@@ -58,6 +52,7 @@ public class Compra {
     public LocalDateTime getFecha() {
         return fecha;
     }
+
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
@@ -65,6 +60,7 @@ public class Compra {
     public String getMedioPago() {
         return medioPago;
     }
+
     public void setMedioPago(String medioPago) {
         this.medioPago = medioPago;
     }
@@ -72,6 +68,7 @@ public class Compra {
     public String getComentario() {
         return comentario;
     }
+
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
@@ -79,6 +76,7 @@ public class Compra {
     public String getEstado() {
         return estado;
     }
+
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -86,6 +84,7 @@ public class Compra {
     public Cliente getCliente() {
         return cliente;
     }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -93,9 +92,8 @@ public class Compra {
     public List<ComprasProducto> getProductos() {
         return productos;
     }
+
     public void setProductos(List<ComprasProducto> productos) {
         this.productos = productos;
     }
-
-
 }
