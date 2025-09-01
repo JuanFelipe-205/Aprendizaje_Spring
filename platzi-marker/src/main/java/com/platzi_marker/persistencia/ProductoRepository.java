@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository /// Esta anotacion permite identificar que esta clase interactua con la BD
-public class productRespoitory implements ProductRepository {
+public class ProductoRepository implements ProductRepository {
 
     /// Atributos
     @Autowired

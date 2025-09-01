@@ -1,9 +1,15 @@
 package com.platzi_marker.web.controller;
 
 import com.platzi_marker.domain.Product;
-import com.platzi_marker.domain.repository.ProductRepository;
 import com.platzi_marker.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,23 +23,43 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    public List<Product> getAll(){
-        return productService.getAll();
+    @GetMapping("/all")
+    public ResponseEntity<List<Product>> getAll(){
+        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
-    public Optional<Product> getProduct(int productId){
-        return productService.getProduct(productId);
+    @GetMapping("id/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable("id") int productId){
+        return productService.getProduct(productId)
+                .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); ///Esto es la respuesta en POSTMAN
     }
 
-    public Optional<List<Product>> getByCategory(int categoryId){
-        return productService.getByCategory(categoryId);
+    @GetMapping("category/{categoryId}")
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId){
+        return productService.getByCategory(categoryId)
+                .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    public Product save(Product product){
-        return productService.save(product);
+    @PostMapping("/save")
+    public ResponseEntity<Product> save(@RequestBody Product product){
+        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
-    public boolean delete(int productId){
-       return productService.delete(productId);
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity delete(@PathVariable("id") int productId){
+       if (productService.delete(productId)){
+           return new ResponseEntity(HttpStatus.OK);
+       }else{
+           return new ResponseEntity(HttpStatus.NOT_FOUND);
+       }
     }
+
+    /**
+     * Respuesta HTTPS ...
+     * NOT_FOUND = 400
+     * OK = 200
+     * CREATE = 201
+     */
 }

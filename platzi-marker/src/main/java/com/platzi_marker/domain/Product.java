@@ -3,20 +3,20 @@ package com.platzi_marker.domain;
 public class Product {
 
     /// Atributos
-    private int proudctId;
+    private Integer productId;
     private String name;
-    private int idCategory;
+    private int categoryId;
     private double price;
     private int stock;
     private boolean active;
     private Category category ;
 
     /// Set y Get
-    public int getProudctId() {
-        return proudctId;
+    public Integer getProductId() {
+        return productId;
     }
-    public void setProudctId(int proudctId) {
-        this.proudctId = proudctId;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -26,11 +26,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public int getCategoryId() {
+        return categoryId;
     }
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public double getPrice() {
@@ -59,5 +59,20 @@ public class Product {
     }
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    // ToString
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "\n productId=" + productId +
+                "\n name='" + name + '\'' +
+                "\n categoryId=" + categoryId +
+                "\n price=" + price +
+                "\n stock=" + stock +
+                "\n active=" + active +
+                "\n category=" + category +
+                '}';
     }
 }

@@ -14,9 +14,9 @@ import jakarta.persistence.Table;
 @Table(name = "productos") /// Esto permite identificar el nombre de la Base y comprarla con la clase actial
 public class Producto {
 
-    @Id /// Se coloca porque es la PK
-    @GeneratedValue(strategy =  GenerationType.IDENTITY) /// Esto hace que se genere automaticamente el ID
-    @Column(name = "id_producto") /// mapea el valor de la BD con el del parametro
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
     private Integer idProducto;
 
     private String nombre;

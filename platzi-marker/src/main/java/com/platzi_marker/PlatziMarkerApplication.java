@@ -10,4 +10,5 @@ public class PlatziMarkerApplication {
 		SpringApplication.run(PlatziMarkerApplication.class, args);
 	}
 
+	/// Despligue en terminal: C:\Users\juan.vargas\Documents\Universidad_JAVA\Aprendizaje_Spring\platzi-marker>java -jar target/platzi-marker-0.0.1-SNAPSHOT.jar
 }
